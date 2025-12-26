@@ -1,0 +1,719 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurex | The Future of Crypto Trading</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    animation: {
+                        'scroll': 'scroll 30s linear infinite',
+                        'scroll-reverse': 'scroll-reverse 30s linear infinite',
+                        'blob': 'blob 7s infinite',
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+                        'scroll-reverse': { '0%': { transform: 'translateX(-50%)' }, '100%': { transform: 'translateX(0)' } },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        },
+                        'gradient-x': {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #030408; color: #e2e8f0; }
+        .glass-nav { background: rgba(3, 4, 8, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .shiny-border { position: relative; }
+        .shiny-border::before { content: ""; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(60, 130, 246, 0.5), rgba(255,255,255,0.1)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        
+        /* 3D Logo Effect */
+        .logo-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+        .logo-container:hover .logo-3d {
+            transform: translateY(-5px) rotateX(10deg);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500/30 selection:text-blue-200">
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-10">
+                <!-- 3D Shining Logo -->
+                <a href="#" class="flex items-center gap-3 group logo-container">
+                    <div class="relative w-9 h-9">
+                        <!-- Glow behind -->
+                        <div class="absolute inset-0 bg-blue-500 rounded-lg blur-lg opacity-40 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        <!-- Main Icon Shape -->
+                        <div class="logo-3d relative w-full h-full bg-gradient-to-br from-blue-400 via-blue-600 to-indigo-700 rounded-lg flex items-center justify-center text-white shadow-[0_4px_10px_rgba(0,0,0,0.5)] border-t border-white/40">
+                            <!-- Inner shine -->
+                            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-lg"></div>
+                            <span class="iconify relative z-10 drop-shadow-md" data-icon="lucide:gem" data-width="1.5" width="20"></span>
+                        </div>
+                    </div>
+                    <span class="text-lg font-semibold tracking-tight text-white group-hover:text-blue-300 transition-colors">Aurex</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-400">
+                    <a href="#" class="hover:text-white transition-colors py-2">Exchange</a>
+                    <a href="#" class="hover:text-white transition-colors py-2">Ecosystem</a>
+                    <a href="#" class="hover:text-white transition-colors py-2">Institutional</a>
+                    <a href="#" class="hover:text-white transition-colors py-2">Learn</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="#" class="hidden md:block text-sm font-medium text-slate-300 hover:text-white transition-colors px-3 py-2">Sign In</a>
+                <a href="#" class="group relative px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <span class="relative z-10">Get App</span>
+                </a>
+                <button class="md:hidden text-white p-1">
+                    <span class="iconify" data-icon="lucide:menu" data-width="1.5" width="24"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Infinite Crypto Ticker -->
+    <div class="mt-20 border-b border-white/5 bg-[#05060a] py-3 overflow-hidden relative z-10">
+        <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#05060a] to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#05060a] to-transparent z-10 pointer-events-none"></div>
+        <div class="flex animate-scroll hover:[animation-play-state:paused] w-max">
+            <!-- Set 1 -->
+            <div class="flex gap-12 px-6">
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">BTC</span>
+                    <span class="text-white">$64,231.45</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 2.4%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">ETH</span>
+                    <span class="text-white">$3,452.12</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 1.8%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">SOL</span>
+                    <span class="text-white">$145.89</span>
+                    <span class="text-rose-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-down-right" width="14"></span> 0.5%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">ARX</span>
+                    <span class="text-white">$0.85</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 12.4%</span>
+                </div>
+            </div>
+            <!-- Duplicate for infinite loop -->
+            <div class="flex gap-12 px-6">
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">BTC</span>
+                    <span class="text-white">$64,231.45</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 2.4%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">ETH</span>
+                    <span class="text-white">$3,452.12</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 1.8%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">SOL</span>
+                    <span class="text-white">$145.89</span>
+                    <span class="text-rose-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-down-right" width="14"></span> 0.5%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">ARX</span>
+                    <span class="text-white">$0.85</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 12.4%</span>
+                </div>
+            </div>
+             <!-- Duplicate 3 for infinite loop -->
+             <div class="flex gap-12 px-6">
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">BTC</span>
+                    <span class="text-white">$64,231.45</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 2.4%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">ETH</span>
+                    <span class="text-white">$3,452.12</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 1.8%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">SOL</span>
+                    <span class="text-white">$145.89</span>
+                    <span class="text-rose-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-down-right" width="14"></span> 0.5%</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm font-medium group cursor-pointer">
+                    <span class="text-slate-400 group-hover:text-white transition-colors">ARX</span>
+                    <span class="text-white">$0.85</span>
+                    <span class="text-emerald-400 flex items-center gap-0.5"><span class="iconify" data-icon="lucide:arrow-up-right" width="14"></span> 12.4%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative pt-24 pb-40 overflow-hidden">
+        <!-- Animated Background Blobs -->
+        <div class="absolute top-0 -left-40 w-96 h-96 bg-blue-600/20 rounded-full blur-[128px] animate-blob mix-blend-screen"></div>
+        <div class="absolute top-0 -right-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-[128px] animate-blob animation-delay-2000 mix-blend-screen"></div>
+        <div class="absolute -bottom-40 left-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[128px] animate-blob animation-delay-4000 mix-blend-screen"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium mb-8 backdrop-blur-md">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    <span>Zero fees on first deposit</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-semibold tracking-tight text-white mb-8 leading-[1.05]">
+                    The <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 animate-gradient-x">Fastest Way</span><br> to Buy &amp; Trade Crypto.
+                </h1>
+                <p class="text-lg text-slate-400 mb-12 max-w-lg leading-relaxed">
+                    Join 150M+ users buying and selling cryptocurrencies at true cost. Experience the power of professional tools with consumer simplicity.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/10 rounded-full p-1.5 pr-2 pl-6 w-fit transition-all focus-within:ring-2 focus-within:ring-blue-500/50 hover:bg-white/10">
+                        <input type="email" placeholder="Email address" class="bg-transparent text-white px-0 py-3 outline-none w-full sm:w-60 text-sm placeholder:text-slate-500">
+                        <button class="bg-white text-black hover:bg-slate-200 px-6 py-2.5 rounded-full text-sm font-semibold transition-all whitespace-nowrap shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)]">
+                            Start Trading
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animated Phone Visual -->
+            <div class="relative lg:h-[650px] flex items-center justify-center animate-float">
+                <div class="relative w-[320px] h-[640px] bg-[#05060A] border-[8px] border-[#1a1f2e] rounded-[3.5rem] shadow-2xl overflow-hidden z-20 ring-1 ring-white/10">
+                    <div class="h-10 bg-[#05060A] flex justify-between px-8 items-center absolute top-0 w-full z-30">
+                        <div class="w-20 h-6 bg-black rounded-b-xl mx-auto absolute left-0 right-0 top-0"></div>
+                        <span class="text-[10px] text-white font-medium ml-1">9:41</span>
+                    </div>
+                    
+                    <div class="p-6 pt-14 h-full bg-gradient-to-b from-[#0B0E14] to-[#05060A] relative">
+                         <!-- App Header -->
+                         <div class="flex justify-between items-center mb-8">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-xs font-bold text-white shadow-lg shadow-blue-500/30">JD</div>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/5">
+                                <span class="iconify text-slate-400" data-icon="lucide:bell" data-width="1.5"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mb-8">
+                            <div class="text-sm text-slate-400 mb-1">Total Balance</div>
+                            <div class="text-4xl font-semibold text-white tracking-tighter mb-2">$24,592.31</div>
+                            <div class="inline-flex items-center gap-1 text-xs bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full font-medium">
+                                <span class="iconify" data-icon="lucide:trending-up" width="12"></span> +$1,204.54 (5.2%)
+                            </div>
+                        </div>
+                        
+                        <!-- Action Grid -->
+                        <div class="grid grid-cols-4 gap-3 mb-8">
+                            <button class="flex flex-col items-center gap-2 group">
+                                <div class="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-900/20 group-hover:scale-105 transition-transform">
+                                    <span class="iconify" data-icon="lucide:plus" width="24"></span>
+                                </div>
+                                <span class="text-[11px] font-medium text-slate-300">Buy</span>
+                            </button>
+                            <button class="flex flex-col items-center gap-2 group">
+                                <div class="w-14 h-14 rounded-2xl bg-[#1e2330] flex items-center justify-center text-white border border-white/5 group-hover:bg-[#252b3b] transition-colors">
+                                    <span class="iconify" data-icon="lucide:arrow-right" width="24"></span>
+                                </div>
+                                <span class="text-[11px] font-medium text-slate-300">Send</span>
+                            </button>
+                             <button class="flex flex-col items-center gap-2 group">
+                                <div class="w-14 h-14 rounded-2xl bg-[#1e2330] flex items-center justify-center text-white border border-white/5 group-hover:bg-[#252b3b] transition-colors">
+                                    <span class="iconify" data-icon="lucide:arrow-left-right" width="24"></span>
+                                </div>
+                                <span class="text-[11px] font-medium text-slate-300">Swap</span>
+                            </button>
+                             <button class="flex flex-col items-center gap-2 group">
+                                <div class="w-14 h-14 rounded-2xl bg-[#1e2330] flex items-center justify-center text-white border border-white/5 group-hover:bg-[#252b3b] transition-colors">
+                                    <span class="iconify" data-icon="lucide:layout-grid" width="24"></span>
+                                </div>
+                                <span class="text-[11px] font-medium text-slate-300">More</span>
+                            </button>
+                        </div>
+
+                        <!-- Live Assets -->
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center ring-1 ring-orange-500/20">
+                                        <span class="iconify" data-icon="lucide:bitcoin" width="20"></span>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-white">Bitcoin</div>
+                                        <div class="text-[11px] text-slate-500">BTC</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-medium text-white">$64,231</div>
+                                    <div class="text-[11px] text-emerald-400">+2.4%</div>
+                                </div>
+                            </div>
+                             <div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-indigo-500/10 text-indigo-500 flex items-center justify-center ring-1 ring-indigo-500/20">
+                                        <span class="iconify" data-icon="lucide:triangle" width="20"></span>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium text-white">Ethereum</div>
+                                        <div class="text-[11px] text-slate-500">ETH</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-medium text-white">$3,452</div>
+                                    <div class="text-[11px] text-emerald-400">+1.8%</div>
+                                </div>
+                            </div>
+                            <!-- Floating Promo Card inside phone -->
+                            <div class="mt-4 p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-xl transform translate-x-8 -translate-y-8"></div>
+                                <div class="relative z-10">
+                                    <div class="text-xs font-medium text-blue-100 mb-1">Supercharger</div>
+                                    <div class="text-lg font-semibold mb-2">Earn 20% p.a.</div>
+                                    <div class="h-1 w-12 bg-white/30 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Floating Element -->
+                <div class="absolute -right-12 top-1/4 p-4 glass-card rounded-2xl animate-float animation-delay-1000 hidden lg:block z-30 shadow-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center">
+                            <span class="iconify" data-icon="lucide:arrow-up" width="20"></span>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400">Received</div>
+                            <div class="text-sm font-bold text-white">+0.425 BTC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Partners Marquee -->
+    <div class="py-10 border-y border-white/5 bg-[#030408]">
+        <p class="text-center text-xs font-medium text-slate-500 tracking-widest uppercase mb-8">Trusted by industry leaders</p>
+        <div class="relative overflow-hidden w-full">
+            <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#030408] to-transparent z-10"></div>
+            <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#030408] to-transparent z-10"></div>
+            <div class="flex animate-scroll-reverse w-max items-center gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:box" width="24"></span><span class="font-bold text-xl">BlockChain</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:hexagon" width="24"></span><span class="font-bold text-xl">Hexagon</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:triangle" width="24"></span><span class="font-bold text-xl">Venture</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:circle" width="24"></span><span class="font-bold text-xl">Orbit</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:diamond" width="24"></span><span class="font-bold text-xl">Gemini</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:cloud-lightning" width="24"></span><span class="font-bold text-xl">Thunder</span></div>
+                <!-- Duplicate -->
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:box" width="24"></span><span class="font-bold text-xl">BlockChain</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:hexagon" width="24"></span><span class="font-bold text-xl">Hexagon</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:triangle" width="24"></span><span class="font-bold text-xl">Venture</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:circle" width="24"></span><span class="font-bold text-xl">Orbit</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:diamond" width="24"></span><span class="font-bold text-xl">Gemini</span></div>
+                <div class="flex items-center gap-2"><span class="iconify" data-icon="lucide:cloud-lightning" width="24"></span><span class="font-bold text-xl">Thunder</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <section class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <span class="text-blue-400 font-semibold tracking-wide text-xs uppercase mb-3 block">Get Started</span>
+                <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white mb-4">Start trading in minutes</h2>
+                <p class="text-slate-400">Three simple steps to your first crypto portfolio.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10 relative">
+                <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent border-t border-dashed border-slate-700 z-0"></div>
+
+                <!-- Steps -->
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-24 h-24 rounded-2xl bg-[#0B0E14] border border-white/10 flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <span class="iconify text-blue-500" data-icon="lucide:user-plus" width="32"></span>
+                        <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Create Account</h3>
+                    <p class="text-sm text-slate-400 max-w-xs">Sign up with your email and verify your identity in under 2 minutes.</p>
+                </div>
+
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-24 h-24 rounded-2xl bg-[#0B0E14] border border-white/10 flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <span class="iconify text-indigo-500" data-icon="lucide:wallet" width="32"></span>
+                         <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Link Bank</h3>
+                    <p class="text-sm text-slate-400 max-w-xs">Connect your bank account or card for instant zero-fee deposits.</p>
+                </div>
+
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-24 h-24 rounded-2xl bg-[#0B0E14] border border-white/10 flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <span class="iconify text-purple-500" data-icon="lucide:bar-chart-2" width="32"></span>
+                         <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">3</div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Start Trading</h3>
+                    <p class="text-sm text-slate-400 max-w-xs">Buy, sell, and earn rewards on your favorite cryptocurrencies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Security (Gradient Mesh Background) -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030408] via-[#05060a] to-[#030408]"></div>
+        <!-- Colorful Mesh -->
+        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[100px] animate-blob mix-blend-screen pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] animate-blob animation-delay-4000 mix-blend-screen pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                <div>
+                    <span class="text-emerald-400 font-semibold tracking-wide text-xs uppercase mb-3 flex items-center gap-2">
+                        <span class="iconify" data-icon="lucide:shield-check"></span> Security First
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">Fortress-grade security <br>for your assets.</h2>
+                    <p class="text-lg text-slate-400 leading-relaxed">
+                        We prioritize the protection of your data and funds above all else. With military-grade encryption and cold storage, you can trade with peace of mind.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="shiny-border bg-[#0a0d17]/80 backdrop-blur-md p-6 rounded-2xl group hover:-translate-y-1 transition-transform">
+                        <span class="iconify text-blue-500 mb-4" data-icon="lucide:snowflake" width="32"></span>
+                        <h3 class="text-white font-semibold mb-2">Cold Storage</h3>
+                        <p class="text-sm text-slate-400">98% of user funds are stored offline in multi-sig wallets.</p>
+                    </div>
+                    <div class="shiny-border bg-[#0a0d17]/80 backdrop-blur-md p-6 rounded-2xl group hover:-translate-y-1 transition-transform">
+                        <span class="iconify text-purple-500 mb-4" data-icon="lucide:lock" width="32"></span>
+                        <h3 class="text-white font-semibold mb-2">SOC2 Certified</h3>
+                        <p class="text-sm text-slate-400">Audited systems ensuring data privacy and integrity.</p>
+                    </div>
+                    <div class="shiny-border bg-[#0a0d17]/80 backdrop-blur-md p-6 rounded-2xl group hover:-translate-y-1 transition-transform sm:col-span-2">
+                        <span class="iconify text-emerald-500 mb-4" data-icon="lucide:umbrella" width="32"></span>
+                        <h3 class="text-white font-semibold mb-2">$750M Insurance Fund</h3>
+                        <p class="text-sm text-slate-400">Industry-leading insurance coverage for digital assets against theft or physical damage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Web3 & Ecosystem -->
+    <section class="py-20 relative overflow-hidden bg-[#020305]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c101b] to-[#05060a] border border-white/5 p-8 md:p-16">
+                <!-- Background decorative elements -->
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-indigo-500/20 to-pink-500/20 rounded-full blur-[80px] pointer-events-none"></div>
+                
+                <div class="flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+                    <div class="md:w-1/2">
+                        <span class="text-pink-500 font-semibold tracking-wide text-xs uppercase mb-3 block">Web3 Ready</span>
+                        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white mb-6">Explore the NFT &amp; DeFi Ecosystem.</h2>
+                        <p class="text-slate-400 mb-8 text-lg">
+                            Connect to the decentralized world. Buy rare collectibles, trade on DEXs, and manage your DeFi portfolio directly from the Aurex app.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-3 rounded-xl">
+                                <span class="iconify text-pink-400" data-icon="lucide:image" width="24"></span>
+                                <div>
+                                    <div class="text-white font-medium text-sm">NFT Market</div>
+                                    <div class="text-xs text-slate-500">Zero gas fees</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-3 rounded-xl">
+                                <span class="iconify text-blue-400" data-icon="lucide:globe" width="24"></span>
+                                <div>
+                                    <div class="text-white font-medium text-sm">DeFi Wallet</div>
+                                    <div class="text-xs text-slate-500">Your keys, your crypto</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3D Card Visual for NFT -->
+                    <div class="md:w-5/12 perspective-1000">
+                        <div class="relative w-full aspect-[4/5] bg-gradient-to-b from-gray-800 to-black rounded-2xl border border-white/10 shadow-2xl overflow-hidden group hover:rotate-y-6 transition-transform duration-500 transform-style-3d">
+                            <img src="https://images.unsplash.com/photo-1635776062127-d379bfcba9f8?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;w=1000&amp;auto=format&amp;fit=crop" alt="NFT Art" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <div class="text-xs text-slate-300 mb-1">Current Bid</div>
+                                        <div class="text-xl font-bold text-white">4.25 ETH</div>
+                                    </div>
+                                    <button class="bg-white text-black text-xs font-bold px-4 py-2 rounded-full hover:bg-slate-200 transition-colors">Place Bid</button>
+                                </div>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium text-white border border-white/10">
+                                Ending in 2h 45m
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Global Stats -->
+    <section class="py-24 border-b border-white/5 bg-[#030408] relative">
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 mb-2">150M+</div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Verified Users</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 mb-2">100+</div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Countries Supported</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-2">$5B+</div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Quarterly Volume</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400 mb-2">&lt; 50ms</div>
+                    <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Latency Speed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features: Earn -->
+    <section class="py-32 relative overflow-hidden bg-[#05060A]">
+        <div class="absolute top-1/2 left-0 w-full h-[500px] bg-gradient-to-r from-blue-900/10 via-purple-900/10 to-blue-900/10 blur-[100px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="order-2 lg:order-1 relative group perspective-1000">
+                    <div class="shiny-border bg-[#0a0d17]/80 rounded-2xl p-8 max-w-md mx-auto lg:ml-0 relative z-10 backdrop-blur-xl shadow-2xl transition-transform duration-500 hover:rotate-y-2 hover:rotate-x-2 transform-style-3d">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-sm text-slate-400 font-medium">Aurex Earn</span>
+                            <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded font-medium flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Active
+                            </span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-[#161b28]/50 rounded-xl border border-white/5 hover:border-white/20 hover:bg-[#161b28] transition-all cursor-default">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-xs">P</div>
+                                    <span class="font-medium text-white">Polkadot</span>
+                                </div>
+                                <span class="text-emerald-400 font-semibold">14.5% p.a.</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-[#161b28]/50 rounded-xl border border-white/5 hover:border-white/20 hover:bg-[#161b28] transition-all cursor-default">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">U</div>
+                                    <span class="font-medium text-white">USDC</span>
+                                </div>
+                                <span class="text-emerald-400 font-semibold">6.5% p.a.</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-[#161b28]/50 rounded-xl border border-white/5 hover:border-white/20 hover:bg-[#161b28] transition-all cursor-default">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold text-xs">B</div>
+                                    <span class="font-medium text-white">Bitcoin</span>
+                                </div>
+                                <span class="text-emerald-400 font-semibold">3.0% p.a.</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-white/5">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-400">Total Earnings</span>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-bold text-lg">+$1,842.23</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <span class="text-blue-500 font-semibold tracking-wide text-sm uppercase mb-3 block">Aurex Earn</span>
+                    <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">Make your crypto <br> <span class="italic text-slate-400">work harder.</span></h2>
+                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
+                        Don't just hold. Earn up to 14.5% p.a. on your crypto assets. Select from over 25+ tokens and stablecoins with flexible terms. Rewards are paid weekly directly into your crypto wallet.
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 text-white font-medium group transition-all">
+                        <span class="border-b border-white group-hover:border-blue-500 group-hover:text-blue-500 transition-colors pb-0.5">Calculate Rewards</span>
+                        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="1.5"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Section -->
+    <section class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span class="text-blue-500 font-semibold tracking-wide text-sm uppercase mb-3 block">Aurex Visa Card</span>
+            <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">The only card you need.</h2>
+            <p class="text-lg text-slate-400 mb-16 max-w-2xl mx-auto">
+                Enjoy up to 5% back on all spending with no annual fees. Top up with crypto or fiat and spend anywhere Visa is accepted.
+            </p>
+
+            <div class="relative w-full max-w-lg mx-auto h-64 md:h-80 perspective-1000 group cursor-pointer mb-20">
+                 <div class="relative w-full h-full rounded-3xl bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#06b6d4] shadow-[0_20px_50px_-12px_rgba(59,130,246,0.5)] flex flex-col justify-between p-8 text-left transition-transform transform group-hover:rotate-y-6 group-hover:scale-105 duration-500 border border-white/10 overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-white/20 rounded-full blur-3xl"></div>
+                    <div class="flex justify-between items-start relative z-10">
+                         <div class="w-14 h-10 bg-gradient-to-r from-yellow-200 to-yellow-400 rounded-md shadow-sm border border-yellow-500/30"></div> 
+                         <span class="text-white/90 font-bold italic text-lg tracking-wider">VISA</span>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="text-white/90 font-mono text-2xl tracking-widest mb-6 drop-shadow-md">**** **** **** 4242</div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <div class="text-[10px] text-white/60 uppercase tracking-widest mb-1">Card Holder</div>
+                                <div class="text-white font-medium tracking-tight uppercase text-sm">John Doe</div>
+                            </div>
+                            <div class="w-10 h-6 flex relative">
+                                <div class="w-6 h-6 bg-white/80 rounded-full absolute left-0"></div>
+                                <div class="w-6 h-6 bg-white/60 rounded-full absolute left-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                 </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 text-left">
+                <div class="bg-[#0f131f] hover:bg-[#161b28] transition-colors p-8 rounded-2xl border border-white/5 group">
+                    <span class="iconify text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-300" data-icon="lucide:coins" width="32"></span>
+                    <h3 class="text-xl font-medium text-white mb-2">Up to 5% Back</h3>
+                    <p class="text-sm text-slate-400">Receive CRO rewards instantly on every purchase you make.</p>
+                </div>
+                <div class="bg-[#0f131f] hover:bg-[#161b28] transition-colors p-8 rounded-2xl border border-white/5 group">
+                    <span class="iconify text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-300" data-icon="lucide:plane" width="32"></span>
+                    <h3 class="text-xl font-medium text-white mb-2">Lounge Access</h3>
+                    <p class="text-sm text-slate-400">Unlimited complimentary access to 1000+ airport lounges worldwide.</p>
+                </div>
+                <div class="bg-[#0f131f] hover:bg-[#161b28] transition-colors p-8 rounded-2xl border border-white/5 group">
+                    <span class="iconify text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-300" data-icon="lucide:music" width="32"></span>
+                    <h3 class="text-xl font-medium text-white mb-2">Spotify &amp; Netflix</h3>
+                    <p class="text-sm text-slate-400">100% reimbursement on your favorite subscription services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Large CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto relative rounded-[3rem] overflow-hidden">
+            <!-- Animated Gradient Background -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 animate-gradient-x"></div>
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            
+            <div class="relative z-10 px-6 py-24 text-center">
+                <h2 class="text-4xl md:text-6xl font-semibold text-white tracking-tight mb-6">Ready to start your journey?</h2>
+                <p class="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">Join the fastest growing crypto community. Create your account today and get $25 worth of ARX.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="px-8 py-4 bg-white text-indigo-900 rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl">
+                        Create Free Account
+                    </button>
+                    <button class="px-8 py-4 bg-indigo-800/50 backdrop-blur-md border border-indigo-400/30 text-white rounded-full font-bold text-sm hover:bg-indigo-800/70 transition-colors">
+                        Download App
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 pt-20 pb-10 bg-[#020305]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                         <div class="relative w-8 h-8 flex items-center justify-center">
+                            <div class="absolute inset-0 bg-blue-500 blur opacity-30"></div>
+                            <div class="relative bg-gradient-to-tr from-blue-600 to-indigo-500 w-8 h-8 rounded-lg flex items-center justify-center text-white border-t border-white/20">
+                                <span class="iconify" data-icon="lucide:gem" width="16"></span>
+                            </div>
+                        </div>
+                        <span class="text-lg font-semibold tracking-tight text-white">AUREX</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6 max-w-xs leading-relaxed">
+                        The world's fastest growing crypto app. Buy, sell, and pay with crypto securely and instantly.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 transition-all"><span class="iconify" data-icon="lucide:twitter" width="18"></span></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-pink-600 transition-all"><span class="iconify" data-icon="lucide:instagram" width="18"></span></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-700 transition-all"><span class="iconify" data-icon="lucide:linkedin" width="18"></span></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium mb-6">App</h4>
+                    <ul class="space-y-4 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Buy &amp; Sell</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Crypto Earn</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Crypto Credit</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Card</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium mb-6">Exchange</h4>
+                    <ul class="space-y-4 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Exchange Home</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Margin Trading</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Derivatives</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">The Syndicate</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium mb-6">Support</h4>
+                    <ul class="space-y-4 text-sm text-slate-500">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Fees</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Security</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-600">© 2024 Aurex Foris DAX Asia Pte. Ltd. All rights reserved.</p>
+                <div class="flex gap-6 text-xs text-slate-600">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body></html>
