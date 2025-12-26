@@ -15,3 +15,6 @@ Platform is a web-based crypto dashboard built for both new users and experience
 Most crypto platforms are either overwhelming or visually outdated. Aurex sits in the middle: clean, modern, and easy to understand without feeling basic. It’s designed to help users focus on their assets, not fight the interface. Whether checking prices, managing a portfolio, or getting started with crypto, Aurex keeps everything simple and visually polished.
 
 <img alt="screencapture-127-0-0-1-5500-index-html-2025-12-26-16_23_24" src="https://github.com/user-attachments/assets/909914d8-754f-4cbf-a3f2-7842f3ecc6f1" />
+
+## Live previews
+Link to the website: https://denysovski.github.io/AurexCrypto/
